@@ -44,8 +44,6 @@ app.get("/janken", (req, res) => {
   if( num==1 ) cpu = 'グー';
   else if( num==2 ) cpu = 'チョキ';
   else cpu = 'パー';
-  // ここに勝敗の判定を入れる
-  // 今はダミーで人間の勝ちにしておく
   let judgement = '';
   if(hand==cpu){
     judgement='あいこ';
