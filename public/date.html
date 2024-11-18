@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>日付計算</title>
+</head>
+<body>
+    <h1>日付計算</h1>
+
+    <% if (date1 && date2 && diffDays != null) { %>
+        <p><%= date1 %> から <%= date2 %> は <%= diffDays %> 日です。</p>
+    <% } %>
+
+    <form action="/date" method="get">
+        <label for="date1">最初の日付: </label>
+        <input type="date" id="date1" name="date1" value="<%= date1 || '' %>" required>
+        <label for="date2">最後の日付: </label>
+        <input type="date" id="date2" name="date2" value="<%= date2 || '' %>" required>
+        <button type="submit">計算</button>
+    </form>
+</body>
+</html>

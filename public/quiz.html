@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>クイズ</title>
+</head>
+<body>
+    <p>富士山の標高は何メートルでしょう？</p>
+
+    <% if (message) { %>
+        <p><%= message %></p>
+    <% } %>
+
+    <form action="/quiz" method="get">
+        答え: <input type="number" name="answer" id="answer" required>m<br>
+        <input type="submit" value="回答">
+    </form>
+</body>
+</html>
