@@ -63,6 +63,7 @@ flowchart TD;
 4. 計算ボタンを押し計算を実行する
 5. 2つの日付の期間が表示される
 
+以下プログラム本体
 ```javascript
 app.get("/date", (req, res) => {
   let date1 = req.query.date1;
@@ -78,7 +79,7 @@ app.get("/date", (req, res) => {
 ```
 
 ### クイズ
-####　機能の説明
+#### 機能の説明
 本プログラムでは, クイズを行える．正解の数字を入力すると，「正解！」，間違っていると「不正解！」が表示される．
 
 本プログラムのフローチャートは下記のものである．
@@ -103,3 +104,20 @@ D --> E
 3. クイズの答えを記入
 4. 回答ボタンを押し正誤判定を実行する
 5. 正解の場合は「正解！」を表示し，不正解の場合「不正解！」を表示
+
+以下プログラム本体
+```javascript
+app.get("/quiz", (req, res) => {
+  const correctAnswer = 3776;
+  const inputAnswer = req.query.answer;
+  if (!inputAnswer){
+    return res.render("quiz", {
+      message: null
+    });
+  }
+  const isCorrect = inputAnswer ===String(correctAnswer);
+  const message = isCorrect ? "正解！" : "不正解！";
+
+  res.render("quiz", {message: message});
+});
+```
