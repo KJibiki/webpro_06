@@ -63,4 +63,29 @@ app.get("/janken", (req, res) => {
   res.render( 'janken', display );
 });
 
+app.get("/date", (req, res) => {
+  let date1 = req.query.date1;
+  let date2 = req.query.date2;
+  let date10 = new Date(date1);
+  let date20 = new Date(date2);
+  let diffTime = date20 - date10;
+  let diffDays = diffTime / (1000 * 60 * 60 * 24);
+
+ 
+  res.render("date", {date1: date1, date2: date2, diffDays: diffDays});
+});
+
+app.get("/quiz", (req, res) => {
+  const correctAnswer = 3776;
+  const inputAnswer = req.query.answer;
+  if (!inputAnswer){
+    return res.render("quiz", {
+      message: null
+    });
+  }
+  const isCorrect = inputAnswer ===String(correctAnswer);
+  const message = isCorrect ? "正解！" : "不正解！";
+
+  res.render("quiz", {message: message});
+});
 app.listen(8080, () => console.log("Example app listening on port 8080!"));
