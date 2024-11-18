@@ -1,16 +1,17 @@
 # webpro_06
 
-##このプログラムについて
 
 ##ファイル一覧
 ファイル名 | 説明
 -|-|
 app5.js | プログラム本体
-public/janken.html | じゃんけんの開始画面
-views/janken.ejs | じゃんけんのテンプレートファイル
+views/date.ejs | 日付計算のテンプレートファイル
+views/quiz.ejs | クイズのテンプレーファイル
+
+##日付計算の説明
 
 1. app5.jsを起動する
-2. Webブラウザでlocalhost:8080/public/janken.htlmにアクセスする
+2. Webブラウザでlocalhost:8080/public/jにアクセスする
 3. 自分の手を入力する
 
 ```mermaid
