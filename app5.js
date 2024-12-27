@@ -88,4 +88,12 @@ app.get("/quiz", (req, res) => {
 
   res.render("quiz", {message: message});
 });
+
+app.get("/bmi", (req, res) => {
+  const weight = parseFloat(req.query.weight);
+  const height = parseFloat(req.query.height);
+  const bmi = weight / ((height/100)*(height/100));
+  const cutbmi = Math.round(bmi*100)/100;
+  res.render("bmi", {bmi: cutbmi});
+})
 app.listen(8080, () => console.log("Example app listening on port 8080!"));

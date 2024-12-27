@@ -7,6 +7,7 @@
 app5.js | プログラム本体
 views/date.ejs | 日にち計算のテンプレートファイル
 views/quiz.ejs | クイズのテンプレーファイル
+views/bmi.ejs | BIM計算のテンプレートファイル
 
 ## 起動方法
 1. app5.jsを下記コマンドによりローカルサーバーとして起動する．
@@ -24,6 +25,8 @@ URLは以下のようになる．
 http://localhost:8080/date
 クイズ
 http://localhost:8080/quiz
+BMI計算
+http://localhost:8080/bmi
 ```
 
 ## gitでの管理方法
@@ -120,4 +123,42 @@ app.get("/quiz", (req, res) => {
 
   res.render("quiz", {message: message});
 });
+```
+
+### BMI計算
+#### 機能の説明
+本プログラムでは，BMIの計算を行う子ができる．
+体重と身長を入力することで，体重×$身長^2$を行いBMIを算出する．
+本プログラムのフローチャートは以下のものである．
+
+```mermaid
+flowchart TD;
+A[開始]
+B[体重・身長を入力]
+C[体重÷身長の二乗を処理]
+D[得られた結果を小数第2位までで四捨五入]
+E[終了]
+A --> B
+B --> C
+C --> D
+D --> E
+
+```
+
+#### 使用手順
+1. app5.jsを起動する
+2. Webブラウザでlocalhost:8080/public/bmiにアクセスする
+3. 体重・身長を入力
+4. 計算ボタンを押し計算を実行する
+5. 入力されたデータを基にBMIが表示される
+
+以下プログラム本体
+```javascript
+app.get("/bmi", (req, res) => {
+  const weight = parseFloat(req.query.weight);
+  const height = parseFloat(req.query.height);
+  const bmi = weight / ((height/100)*(height/100));
+  const cutbmi = Math.round(bmi*100)/100;
+  res.render("bmi", {bmi: cutbmi});
+})
 ```
