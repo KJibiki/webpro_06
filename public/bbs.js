@@ -5,10 +5,18 @@ const bbs = document.querySelector('#bbs');
 document.querySelector('#post').addEventListener('click', () => {
     const name = document.querySelector('#name').value;
     const message = document.querySelector('#message').value;
-
+    const now = new Date();//日時の取得
+    const dateString = now.toLocaleString();//現地時間に修正
+    let selectedColor = '';
+    const colorRadios = document.querySelectorAll('input[name="color"]');
+    colorRadios.forEach(radio => {
+        if (radio.checked) {
+            selectedColor = radio.value;
+        }
+    });
     const params = {  // URL Encode
         method: "POST",
-        body:  'name='+name+'&message='+message,
+        body:  'name='+name+'&message='+message+'&date='+dateString+'&color='+selectedColor,
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
         }
@@ -25,10 +33,11 @@ document.querySelector('#post').addEventListener('click', () => {
     .then( (response) => {
         console.log( response );
         document.querySelector('#message').value = "";
+        
     });
 });
 
-document.querySelector('#check').addEventListener('click', () => {
+function checkAndUpdatePosts() {
     const params = {  // URL Encode
         method: "POST",
         body:  '',
@@ -77,12 +86,19 @@ document.querySelector('#check').addEventListener('click', () => {
                     let mes_area = document.createElement('span');
                     mes_area.className = 'mes';
                     mes_area.innerText = mes.message;
+                    let date_area = document.createElement('span');
+                    date_area.className ='date';
+                    date_area.innerText =mes.date;
+                    mes_area.style.color=mes.color;
                     cover.appendChild( name_area );
                     cover.appendChild( mes_area );
+                    cover.appendChild(date_area);
 
                     bbs.appendChild( cover );
                 }
             })
         }
     });
-});
+};
+
+setInterval(checkAndUpdatePosts, 5000);

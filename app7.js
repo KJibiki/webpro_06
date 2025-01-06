@@ -99,9 +99,20 @@ app.post("/read", (req, res) => {
 app.post("/post", (req, res) => {
   const name = req.body.name;
   const message = req.body.message;
-  console.log( [name, message] );
+  const color = req.body.color;
+  const now = new Date();
+  const dateString = now.toLocaleDateString("ja-JP", {
+    weekday: "short",  // 曜日
+    year: "numeric",  // 年
+    month: "numeric", // 月
+    day: "numeric",   // 日
+    hour: "numeric",  // 時
+    minute: "numeric",// 分
+    second: "numeric",// 秒
+  });
+  console.log( [name, message, color, dateString] );
   // 本来はここでDBMSに保存する
-  bbs.push( { name: name, message: message } );
+  bbs.push( { name: name, message: message, color: color, date: dateString } );
   res.json( {number: bbs.length } );
 });
 
